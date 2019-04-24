@@ -4,7 +4,14 @@ const trianglify = require("trianglify");
 const svgToImg = require("svg-to-img");
 const download = require("image-downloader");
 const deepai = require("deepai");
-const { deepaiKey } = require("./.env");
+const { deepaiKey, firebaseConf } = require("./.env");
+
+// firebase
+const firebase = require('firebase/app');
+require('firebase/auth');
+require('firebase/database');
+const app = firebase.initializeApp(firebaseConf);
+
 
 deepai.setApiKey(deepaiKey);
 

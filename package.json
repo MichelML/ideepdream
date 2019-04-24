@@ -7,5 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "deepai": "^1.0.0",
+    "image-downloader": "^3.4.2",
+    "lodash": "^4.17.11",
+    "svg-to-img": "^2.0.9",
+    "trianglify": "^2.0.0"
+  }
 }

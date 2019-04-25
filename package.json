@@ -12,8 +12,12 @@
     "deepai": "^1.0.0",
     "firebase": "^5.10.0",
     "firebase-admin": "^7.3.0",
+    "google-auth-library": "^3.1.2",
+    "googleapis": "^39.2.0",
     "image-downloader": "^3.4.2",
     "lodash": "^4.17.11",
+    "opn": "^6.0.0",
+    "server-destroy": "^1.0.1",
     "svg-to-img": "^2.0.9",
     "trianglify": "^2.0.0"
   }

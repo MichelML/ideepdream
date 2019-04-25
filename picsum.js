@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 const fs = require("fs");
-const trianglify = require("trianglify");
-const svgToImg = require("svg-to-img");
 const download = require("image-downloader");
 const deepai = require("deepai");
 const { deepaiKey } = require("./.env");
@@ -27,8 +25,12 @@ const deepDreamNest = async (src, dest, iterations) => {
 };
 
 const generateImage = async iterations => {
+  const randomFrom1to1079 = Math.floor(Math.random() * 1079) + 1;
   const date = new Date();
-  const cleanDate =
+  const cleanName =
+    "picsum_" +
+    randomFrom1to1079.toString() +
+    "_" +
     date.getDate().toString() +
     "_" +
     date.getMonth().toString() +
@@ -36,48 +38,32 @@ const generateImage = async iterations => {
     date.getFullYear().toString() +
     "_" +
     date.getTime().toString();
-  fs.mkdirSync(`images/${cleanDate}`);
+  fs.mkdirSync(`images/${cleanName}`);
 
-  // generate triangle
-  const variance = Math.round(Math.random() * 100) / 100;
-  const seed = Math.round(Math.random() * 1000);
-  const trianglifyOptions = { variance, seed, x_colors: "random" };
-  const allOptions = { ...trianglifyOptions, iterations };
-  const svg = trianglify({ variance, seed, x_colors: "random" }).svg();
-  svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-  fs.writeFileSync(
-    `images/${cleanDate}/${cleanDate}.svg`,
-    svg.outerHTML,
-    "utf8"
-  );
-
-  await svgToImg.from(svg.outerHTML).toJpeg({
-    path: "./temp.jpg"
-  });
+  // Download an image with id of 1 to 1079 of 1080px X 1080px from picsum api
+  try {
+    await download.image({
+      url: `https://picsum.photos/id/${randomFrom1to1079}/1080/1080`,
+      dest: "./temp_picsum.jpg"
+    });
+  } catch (error) {
+    console.log(error);
+    console.log("Image with ID " + randomFrom1to1079 + " did not work");
+  }
 
   try {
     await deepDreamNest(
-      "./temp.jpg",
-      `images/${cleanDate}/${cleanDate}.jpg`,
+      "./temp_picsum.jpg",
+      `images/${cleanName}/${cleanName}.jpg`,
       iterations
-    );
-    fs.writeFileSync(
-      `images/${cleanDate}/${cleanDate}.txt`,
-      `
-    trianglify variance: ${allOptions.variance}
-    trianglify seed: ${allOptions.seed}
-    trianglify x_colors: ${allOptions.x_colors}
-    deep dream iterations: ${allOptions.iterations}
-    `,
-      "utf-8"
     );
   } catch (e) {
     console.log(e);
   }
 
   return {
-    filePath: `images/${cleanDate}/${cleanDate}.jpg`,
-    fileName: `${cleanDate}.jpg`
+    filePath: `images/${cleanName}/${cleanName}.jpg`,
+    fileName: `${cleanName}.jpg`
   };
 };
 
@@ -121,7 +107,7 @@ if (require.main === module) {
       // Generate images
       const randomFrom3to7 = Math.floor(Math.random() * 5) + 3;
       const image = await generateImage(randomFrom3to7);
-      // Upload images to google drive
+      // Upload images to Google Drive
       await uploadFile({ drive, ...image });
     }
   })();

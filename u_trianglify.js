@@ -3,30 +3,10 @@ const fs = require("fs");
 const trianglify = require("trianglify");
 const svgToImg = require("svg-to-img");
 const download = require("image-downloader");
-const deepai = require("deepai");
-const { deepaiKey } = require("./.env");
 const getAuthenticatedDrive = require("./google_drive_auth");
 const uploadFile = require("./uploadFile");
 const nIterations = require("./iterations");
-
-deepai.setApiKey(deepaiKey);
-
-const deepDreamNest = async (src, dest, iterations) => {
-  let resp;
-
-  for (let i = 1; i <= iterations; i++) {
-    resp = await deepai.callStandardApi("deepdream", {
-      image: fs.createReadStream(src)
-    });
-
-    fs.unlinkSync(src);
-
-    await download.image({
-      url: resp.output_url,
-      dest: i === iterations ? dest : src
-    });
-  }
-};
+const deepDream = require("./deepDream");
 
 const generateImage = async iterations => {
   const date = new Date();
@@ -58,7 +38,7 @@ const generateImage = async iterations => {
   });
 
   try {
-    await deepDreamNest(
+    await deepDream(
       "./temp.jpg",
       `images/${cleanDate}/${cleanDate}.jpg`,
       iterations

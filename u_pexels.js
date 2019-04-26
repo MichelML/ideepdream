@@ -1,31 +1,12 @@
 #!/usr/bin/env node
 const fs = require("fs");
 const download = require("image-downloader");
-const deepai = require("deepai");
-const { deepaiKey, pexelsKey } = require("./.env");
+const { pexelsKey } = require("./.env");
 const getAuthenticatedDrive = require("./google_drive_auth");
 const uploadFile = require("./uploadFile");
 const axios = require("axios");
 const nIterations = require("./iterations");
-
-deepai.setApiKey(deepaiKey);
-
-const deepDreamNest = async (src, dest, iterations) => {
-  let resp;
-
-  for (let i = 1; i <= iterations; i++) {
-    resp = await deepai.callStandardApi("deepdream", {
-      image: fs.createReadStream(src)
-    });
-
-    fs.unlinkSync(src);
-
-    await download.image({
-      url: resp.output_url,
-      dest: i === iterations ? dest : src
-    });
-  }
-};
+const deepDream = require("./deepDream");
 
 const generateImage = async iterations => {
   const randomFrom1to1000 = Math.floor(Math.random() * 999) + 1;
@@ -60,7 +41,7 @@ const generateImage = async iterations => {
   }
 
   try {
-    await deepDreamNest(
+    await deepDream(
       "./temp_pexels.jpg",
       `images/${cleanName}/${cleanName}.jpg`,
       iterations

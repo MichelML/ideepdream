@@ -6,6 +6,8 @@ const download = require("image-downloader");
 const deepai = require("deepai");
 const { deepaiKey } = require("./.env");
 const getAuthenticatedDrive = require("./google_drive_auth");
+const uploadFile = require("./uploadFile");
+const nIterations = require("./iterations");
 
 deepai.setApiKey(deepaiKey);
 
@@ -81,36 +83,6 @@ const generateImage = async iterations => {
   };
 };
 
-const uploadFile = ({ drive, fileName, filePath }) => {
-  return new Promise((resolve, reject) => {
-    var fileMetadata = {
-      name: fileName,
-      parents: ["1I1V-AvpjenXppwHX46dcNNQO1pUhAfDy"]
-    };
-    var media = {
-      mimeType: "image/jpeg",
-      body: fs.createReadStream(filePath)
-    };
-    drive.files.create(
-      {
-        resource: fileMetadata,
-        media: media,
-        fields: "id"
-      },
-      function(err, file) {
-        if (err) {
-          // Handle error
-          console.error(err);
-          reject(err);
-        } else {
-          console.log("File " + fileName + " created.");
-          resolve();
-        }
-      }
-    );
-  });
-};
-
 if (require.main === module) {
   (async () => {
     // Get authenticated google drive instance
@@ -119,8 +91,7 @@ if (require.main === module) {
     const nImages = parseInt(process.argv[process.argv.length - 1], 10);
     for (let i = 1; i <= nImages; i++) {
       // Generate images
-      const randomFrom3to7 = Math.floor(Math.random() * 5) + 3;
-      const image = await generateImage(randomFrom3to7);
+      const image = await generateImage(nIterations());
       // Upload images to google drive
       await uploadFile({ drive, ...image });
     }

@@ -1,6 +1,0 @@
-
-    trianglify variance: 0.58
-    trianglify seed: 243
-    trianglify x_colors: random
-    deep dream iterations: 4
-    

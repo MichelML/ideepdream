@@ -2,7 +2,7 @@
 const fs = require("fs");
 const download = require("image-downloader");
 const deepai = require("deepai");
-const { deepaiKey } = require("./.env");
+const { deepaiKey } = require("../.env");
 
 deepai.setApiKey(deepaiKey);
 

@@ -2,22 +2,12 @@
 const fs = require("fs");
 const trianglify = require("trianglify");
 const svgToImg = require("svg-to-img");
-const download = require("image-downloader");
 const getAuthenticatedDrive = require("./google_drive_auth");
-const uploadFile = require("./uploadFile");
-const nIterations = require("./iterations");
 const deepDream = require("./deepDream");
+const dateSuffix = require("./dateSuffix");
 
 const generateImage = async iterations => {
-  const date = new Date();
-  const cleanDate =
-    date.getDate().toString() +
-    "_" +
-    date.getMonth().toString() +
-    "_" +
-    date.getFullYear().toString() +
-    "_" +
-    date.getTime().toString();
+  const cleanDate = "trianglify_" + dateSuffix();
   fs.mkdirSync(`images/${cleanDate}`);
 
   // generate triangle
@@ -63,17 +53,12 @@ const generateImage = async iterations => {
   };
 };
 
+module.exports = generateImage;
+
 if (require.main === module) {
   (async () => {
     // Get authenticated google drive instance
     const drive = await getAuthenticatedDrive();
-
-    const nImages = parseInt(process.argv[process.argv.length - 1], 10);
-    for (let i = 1; i <= nImages; i++) {
-      // Generate images
-      const image = await generateImage(nIterations());
-      // Upload images to google drive
-      await uploadFile({ drive, ...image });
-    }
+    await generateAndUpload(drive, generateImage);
   })();
 }

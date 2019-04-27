@@ -15,6 +15,7 @@
     "googleapis": "^39.2.0",
     "image-downloader": "^3.4.2",
     "lodash": "^4.17.11",
+    "napajs": "^0.2.3",
     "opn": "^6.0.0",
     "rimraf": "^2.6.3",
     "server-destroy": "^1.0.1",

@@ -8,7 +8,7 @@ const {google} = require('googleapis');
 
 
 // Download your OAuth2 configuration from the Google
-const keys = require("./.env").oauth;
+const keys = require("../.env").oauth;
 
 /**
  * Start by acquiring a pre-authenticated oAuth2 client.

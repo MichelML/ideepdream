@@ -1,14 +1,14 @@
 const fs = require("fs");
 const rimraf = require("rimraf");
-const {driveFolderId} = require("../.env");
+const { driveFolderId } = require("../.env");
 
 module.exports = ({ drive, fileName, filePath }) => {
   return new Promise((resolve, reject) => {
-    var fileMetadata = {
+    const fileMetadata = {
       name: fileName,
       parents: [driveFolderId]
     };
-    var media = {
+    const media = {
       mimeType: "image/jpeg",
       body: fs.createReadStream(filePath)
     };

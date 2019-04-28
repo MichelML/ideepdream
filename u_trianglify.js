@@ -2,9 +2,9 @@
 const fs = require("fs");
 const trianglify = require("trianglify");
 const svgToImg = require("svg-to-img");
-const getAuthenticatedDrive = require("./google_drive_auth");
-const deepDream = require("./deepDream");
-const dateSuffix = require("./dateSuffix");
+const generate = require("./functions/generate");
+const deepDream = require("./functions/deepDream");
+const dateSuffix = require("./functions/dateSuffix");
 
 const generateImage = async iterations => {
   const cleanDate = "trianglify_" + dateSuffix();
@@ -57,8 +57,6 @@ module.exports = generateImage;
 
 if (require.main === module) {
   (async () => {
-    // Get authenticated google drive instance
-    const drive = await getAuthenticatedDrive();
-    await generateAndUpload(drive, generateImage);
+    await generate(generateImage);
   })();
 }

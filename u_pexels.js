@@ -2,11 +2,12 @@
 const fs = require("fs");
 const download = require("image-downloader");
 const { pexelsKey } = require("./.env");
-const getAuthenticatedDrive = require("./functions/google_drive_auth");
 const axios = require("axios");
 const deepDream = require("./functions/deepDream");
-const generateAndUpload = require("./functions/generateAndUpload");
+const generate = require("./functions/generate");
 const dateSuffix = require("./functions/dateSuffix");
+const randomItem = require("./functions/randomItem");
+const randomWord = require("./functions/randomWord");
 
 const generateImage = async iterations => {
   const randomFrom1to1000 = Math.floor(Math.random() * 999) + 1;
@@ -14,12 +15,15 @@ const generateImage = async iterations => {
   fs.mkdirSync(`images/${cleanName}`);
 
   try {
-    const response = await axios.get(
-      `https://api.pexels.com/v1/curated?per_page=1&page=${randomFrom1to1000}`,
-      { headers: { Authorization: pexelsKey } }
-    );
+    const response = await axios.get(`https://api.pexels.com/v1/curated`, {
+      headers: { Authorization: pexelsKey },
+      params: {
+        per_page: 10,
+        query: randomWord()
+      }
+    });
     await download.image({
-      url: response.data.photos[0].src.large,
+      url: randomItem(response.data.photos).src.large,
       dest: "./temp_pexels.jpg",
       followRedirect: true
     });
@@ -48,8 +52,6 @@ module.exports = generateImage;
 
 if (require.main === module) {
   (async () => {
-    // Get authenticated google drive instance
-    const drive = await getAuthenticatedDrive();
-    await generateAndUpload(drive, generateImage);
+    await generate(generateImage);
   })();
 }

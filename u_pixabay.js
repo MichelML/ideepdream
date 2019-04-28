@@ -2,12 +2,12 @@
 const fs = require("fs");
 const download = require("image-downloader");
 const { pixaBayKey } = require("./.env");
-const getAuthenticatedDrive = require("./functions/google_drive_auth");
 const axios = require("axios");
 const deepDream = require("./functions/deepDream");
-const generateAndUpload = require("./functions/generateAndUpload");
+const generate = require("./functions/generate");
 const dateSuffix = require("./functions/dateSuffix");
 const randomWord = require("./functions/randomWord");
+const randomItem = require("./functions/randomItem");
 
 const generateImage = async iterations => {
   const cleanName = "pixabay_" + dateSuffix();
@@ -18,12 +18,11 @@ const generateImage = async iterations => {
       params: {
         key: pixaBayKey,
         q: randomWord(),
-        type: "photo",
-        editors_choice: true
+        image_type: "photo",
       }
     });
     await download.image({
-      url: response.data.hits[0].largeImageURL,
+      url: randomItem(response.data.hits).largeImageURL,
       dest: "./temp_pixabay.jpg",
       followRedirect: true
     });
@@ -52,8 +51,6 @@ module.exports = generateImage;
 
 if (require.main === module) {
   (async () => {
-    // Get authenticated google drive instance
-    const drive = await getAuthenticatedDrive();
-    await generateAndUpload(drive, generateImage);
+    await generate(generateImage);
   })();
 }

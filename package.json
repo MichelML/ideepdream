@@ -17,8 +17,10 @@
     "lodash": "^4.17.11",
     "napajs": "^0.2.3",
     "opn": "^6.0.0",
+    "recursive-readdir": "^2.2.2",
     "rimraf": "^2.6.3",
     "server-destroy": "^1.0.1",
+    "sharp": "^0.22.1",
     "svg-to-img": "^2.0.9",
     "trianglify": "^2.0.0"
   }

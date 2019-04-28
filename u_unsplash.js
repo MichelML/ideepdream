@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 const fs = require("fs");
 const download = require("image-downloader");
-const getAuthenticatedDrive = require("./google_drive_auth");
-const deepDream = require("./deepDream");
-const dateSuffix = require("./dateSuffix");
+const deepDream = require("./functions/deepDream");
+const generate = require("./functions/generate");
+const dateSuffix = require("./functions/dateSuffix");
 
 const generateImage = async iterations => {
   const randomFrom1to4000 = Math.floor(Math.random() * 4000) + 1;
@@ -41,8 +41,6 @@ module.exports = generateImage;
 
 if (require.main === module) {
   (async () => {
-    // Get authenticated google drive instance
-    const drive = await getAuthenticatedDrive();
-    await generateAndUpload(drive, generateImage);
+    await generate(generateImage);
   })();
 }

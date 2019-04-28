@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const fs = require("fs");
 const download = require("image-downloader");
-const getAuthenticatedDrive = require("./functions/google_drive_auth");
+const generate = require("./functions/generate");
 const deepDream = require("./functions/deepDream");
 const dateSuffix = require("./functions/dateSuffix");
 
@@ -40,8 +40,6 @@ module.exports = generateImage;
 
 if (require.main === module) {
   (async () => {
-    // Get authenticated google drive instance
-    const drive = await getAuthenticatedDrive();
-    await generateAndUpload(drive, generateImage);
+    await generate(generateImage);
   })();
 }

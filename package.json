@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf images/*"
   },
   "author": "",
   "license": "ISC",
@@ -15,12 +16,10 @@
     "googleapis": "^39.2.0",
     "image-downloader": "^3.4.2",
     "lodash": "^4.17.11",
-    "napajs": "^0.2.3",
     "opn": "^6.0.0",
     "recursive-readdir": "^2.2.2",
     "rimraf": "^2.6.3",
     "server-destroy": "^1.0.1",
-    "sharp": "^0.22.1",
     "svg-to-img": "^2.0.9",
     "trianglify": "^2.0.0"
   }

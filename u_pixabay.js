@@ -8,6 +8,7 @@ const generate = require("./functions/generate");
 const dateSuffix = require("./functions/dateSuffix");
 const randomWord = require("./functions/randomWord");
 const randomItem = require("./functions/randomItem");
+const resizeImage = require("./functions/resizeImage");
 
 const generateImage = async iterations => {
   const cleanName = "pixabay_" + dateSuffix();
@@ -17,6 +18,7 @@ const generateImage = async iterations => {
     const response = await axios.get(`https://pixabay.com/api/`, {
       params: {
         key: pixaBayKey,
+        min_width: 1080,
         q: randomWord(),
         image_type: "photo",
       }

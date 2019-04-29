@@ -54,7 +54,7 @@ function getAuthenticatedClient() {
             const qs = new url.URL(req.url, "http://localhost:3000")
               .searchParams;
             const code = qs.get("code");
-            console.log(`Code is ${code}`);
+            console.log("Authentication successful!");
             res.end("Authentication successful! Please return to the console.");
             server.destroy();
 

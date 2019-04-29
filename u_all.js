@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const { exec } = require("child_process");
-const getAuthenticatedDrive = require("./functions/google_drive_auth");
+const getAuthenticatedDrive = require("./functions/googleDriveAuth");
 const uploadFiles = require("./functions/uploadFiles");
 const cleanOnExit = require("./functions/cleanOnExit");
 

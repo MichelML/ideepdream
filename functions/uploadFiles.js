@@ -1,7 +1,7 @@
 const fs = require("fs");
 const rimraf = require("rimraf");
 const { driveFolderId } = require("../.env");
-const getAuthenticatedDrive = require("./google_drive_auth");
+const getAuthenticatedDrive = require("./googleDriveAuth");
 const recursive = require("recursive-readdir");
 
 const uploadFiles = async googleDrive => {
@@ -21,7 +21,7 @@ const uploadFiles = async googleDrive => {
       await new Promise((resolve, reject) => {
         const fileMetadata = {
           name: fileName,
-          parents: [driveFolderId]
+          parents: [driveFolderId.deepimages]
         };
         const media = {
           mimeType: "image/jpeg",

@@ -8,7 +8,6 @@ const generate = require("./functions/generate");
 const dateSuffix = require("./functions/dateSuffix");
 const randomWord = require("./functions/randomWord");
 const randomItem = require("./functions/randomItem");
-const resizeImage = require("./functions/resizeImage");
 
 const generateImage = async iterations => {
   const cleanName = "pixabay_" + dateSuffix();

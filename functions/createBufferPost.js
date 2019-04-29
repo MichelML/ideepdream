@@ -2,19 +2,8 @@
 const { buffer } = require("../.env");
 const axios = require("axios");
 const formurlencoded = require("form-urlencoded").default;
-const request = require("request");
 
 (async () => {
-  const redirectLink = await new Promise(resolve => {
-    request.get(
-      "https://docs.google.com/uc?id=1Usj4xeBZ1vtjxtUCgH1ye87Wk4guHPc7",
-      function(err, res, body) {
-        console.log(res.request.uri.href);
-        resolve(res.request.uri.href);
-      }
-    );
-  });
-
   const caption = `caption this
 .⠀⠀
 .⠀⠀
@@ -30,8 +19,8 @@ const request = require("request");
         text: caption,
         profile_ids: [buffer.instagramId],
         media: {
-          picture: redirectLink,
-          thumbnail: redirectLink
+          picture: "https://docs.google.com/uc?id=1Usj4xeBZ1vtjxtUCgH1ye87Wk4guHPc7",
+          thumbnail: "https://docs.google.com/uc?id=1Usj4xeBZ1vtjxtUCgH1ye87Wk4guHPc7"
         }
       })
     )

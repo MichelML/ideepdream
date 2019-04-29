@@ -15,15 +15,12 @@ const generateImage = async iterations => {
   fs.mkdirSync(`images/${cleanName}`);
 
   try {
-    const response = await axios.get(`https://api.pexels.com/v1/curated`, {
-      headers: { Authorization: pexelsKey },
-      params: {
-        per_page: 10,
-        query: randomWord()
-      }
-    });
+    const response = await axios.get(
+      `https://api.pexels.com/v1/curated?per_page=1&page=${randomFrom1to1000}`,
+      { headers: { Authorization: pexelsKey } }
+    );
     await download.image({
-      url: randomItem(response.data.photos).src.large,
+      url: response.data.photos[0].src.large,
       dest: "./temp_pexels.jpg",
       followRedirect: true
     });

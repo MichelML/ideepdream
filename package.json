@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "createimages": "node u_all.js",
+    "bufferposts": "node c_buffer.js",
+    "clean": "rm -rf images/*"
   },
   "author": "",
   "license": "ISC",

@@ -2,11 +2,8 @@
 const { exec } = require("child_process");
 const getAuthenticatedDrive = require("./functions/googleDriveAuth");
 const uploadFiles = require("./functions/uploadFiles");
-const cleanOnExit = require("./functions/cleanOnExit");
 
 (async () => {
-  cleanOnExit();
-
   const drive = await getAuthenticatedDrive();
 
   const nImages = parseInt(process.argv[process.argv.length - 1], 10);

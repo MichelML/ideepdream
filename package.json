@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "createimages": "node u_all.js",
-    "bufferposts": "node c_buffer.js",
+    "images": "node u_all.js",
+    "buffer": "node c_buffer.js",
     "clean": "rm -rf images/*"
   },
   "author": "",

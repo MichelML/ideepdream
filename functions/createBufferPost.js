@@ -24,7 +24,7 @@ module.exports = async function createBufferPost(fileId, drive) {
       }`,
       formurlencoded({
         text: captionGenerator(),
-				top: true,
+				top: !process.env.NOTOP,
         profile_ids: [buffer.instagramId],
         media: {
           picture: imageURL,

@@ -10,10 +10,10 @@ const tags = [
 ];
 
 module.exports = function captionGenerator() {
-  return `I Deep Dream. @pexels @unsplash @pixabay @google @buffer
+  return `caption.
   .
   .
-  ${randomItem(tags)}`;
+  #buffer ${randomItem(tags)}`;
 };
 
 /**

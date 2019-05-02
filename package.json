@@ -8,7 +8,8 @@
     "images": "node u_all.js",
     "buffer": "node c_buffer.js",
     "clean": "rm -rf images/*",
-    "local": "node u_local.js"
+    "local": "node u_local.js",
+    "upload": "node functions/uploadFiles.js"
   },
   "author": "",
   "license": "MIT",

@@ -1,0 +1,6 @@
+red #ed1c24
+maron #613854
+yellow #fff000
+blue #2e9df7
+black
+white

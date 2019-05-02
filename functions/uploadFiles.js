@@ -16,7 +16,7 @@ const getFiles = folder =>
     });
   });
 
-const uploadFiles = async googleDrive => {
+const uploadFiles = async (googleDrive, rm = true) => {
   const drive = googleDrive || (await getAuthenticatedDrive());
   const files = await getFiles("images");
   const jpgFiles = files.filter(file => /\.jpg$/.test(file));
@@ -55,11 +55,11 @@ const uploadFiles = async googleDrive => {
           if (err) {
             // Handle error
             console.error(err);
-            rimraf.sync(filePath);
+            rm && rimraf.sync(filePath);
             reject(err);
           } else {
             console.log("File " + fileName + " created.");
-            rimraf.sync(filePath);
+            rm && rimraf.sync(filePath);
             resolve();
           }
         }
@@ -72,6 +72,6 @@ module.exports = uploadFiles;
 
 if (require.main === module) {
   (async () => {
-    await uploadFiles();
+    await uploadFiles(undefined, false);
   })();
 }

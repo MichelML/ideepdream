@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "images": "node u_all.js",
     "buffer": "node c_buffer.js",
-    "clean": "rm -rf images/*"
+    "clean": "rm -rf images/*",
+    "local": "node u_local.js"
   },
   "author": "",
   "license": "ISC",

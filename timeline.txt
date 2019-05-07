@@ -1,0 +1,29 @@
+April 1st
+--------------
+- Started posting at a rate of 14 posts per day  
+- There was a burst in followers of up to 180, starting from 0  
+- There was a rapid decrease of followers down to 130  
+
+April 14th
+---------------
+- Started posting at a rate of 10 posts per day 
+- Started generating more various hashtags automatically
+- There was a burst in followers of up to 230 
+- There was a rapid decrease of followers down to 150
+
+May 7th
+--------------
+- Started posting at a rate of 2 posts per day 
+- Started reducing hashtags with the ones that work best
+
+What's next
+---------------
+Reduce the number of targeted APIs to those mentionning the instagram account of the author
+  - unsplash
+Focus on Quality vs Quantity
+Honor the people who took the photos
+  - tagged them in the posts
+  - show the original picture
+  - provide the link to the original picture
+Write more interesting captions
+

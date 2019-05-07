@@ -14,10 +14,10 @@ April 14th
 May 7th
 --------------
 - Started posting at a rate of 2 posts per day 
-- Started reducing hashtags with the ones that work best
 
 What's next
 ---------------
+  - Start reducing hashtags with the ones that work best
 Reduce the number of targeted APIs to those mentionning the instagram account of the author
   - unsplash
 Focus on Quality vs Quantity

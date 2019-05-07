@@ -1,6 +1,6 @@
 const { driveFolderId } = require("../.env");
 
-module.exports = async function getDriveFilesIds(drive) {
+module.exports = async function listDriveFiles(drive) {
   const response = await drive.files.list({
       pageSize: 100,
       q: `'${driveFolderId.deepimages}' in parents and trashed = false and mimeType = 'image/jpeg'`

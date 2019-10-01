@@ -21,7 +21,7 @@ const uploadFiles = require("./functions/uploadFiles");
     });
 
   try {
-    await Promise.all([cmd("./u_pexels.js"), cmd("./u_pixabay.js")]);
+    await Promise.all([cmd("./create_pexels.js"), cmd("./create_pixabay.js")]);
     await uploadFiles(drive);
   } catch (e) {
     console.log(e);

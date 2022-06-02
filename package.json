@@ -13,7 +13,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "deepai": "^1.0.0",
     "form-urlencoded": "^3.0.0",
     "google-auth-library": "^3.1.2",
